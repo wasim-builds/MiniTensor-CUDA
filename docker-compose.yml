@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  # ── Test runner ──────────────────────────────────────────────
+  test:
+    build:
+      context: .
+      target: tester
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ./results:/workspace/results
+    command: [ "ctest", "--test-dir", "/workspace/build", "--output-on-failure", "-V" ]
+
+  # ── Benchmark runner ─────────────────────────────────────────
+  benchmark:
+    build:
+      context: .
+      target: runtime
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ./results:/workspace/results
+    command: [ "/workspace/scripts/run_benchmarks.sh" ]
+
+  # ── Interactive dev shell ─────────────────────────────────────
+  dev:
+    build:
+      context: .
+      target: builder
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,profiling
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    command: [ "/bin/bash" ]
