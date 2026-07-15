@@ -5,6 +5,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![CUDA](https://img.shields.io/badge/CUDA-12.3-green.svg)
 ![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)
+[![CI](https://github.com/wasim-builds/MiniTensor-CUDA/actions/workflows/ci.yml/badge.svg)](https://github.com/wasim-builds/MiniTensor-CUDA/actions/workflows/ci.yml)
 
 ---
 
