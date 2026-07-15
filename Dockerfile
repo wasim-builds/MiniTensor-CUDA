@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     python3-pip \
+    python3-dev \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 

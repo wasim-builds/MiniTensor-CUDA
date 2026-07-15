@@ -6,8 +6,11 @@ cmake_minimum_required(VERSION 3.20)
 project(MiniTensor
     VERSION 1.0.0
     DESCRIPTION "Production-level CUDA deep learning engine"
-    LANGUAGES CXX CUDA
+    LANGUAGES CXX
 )
+if(NOT MINITENSOR_CPU_ONLY)
+    enable_language(CUDA)
+endif()
 
 # ─── Standards ───────────────────────────────────────────────
 set(CMAKE_CXX_STANDARD 17)
@@ -68,6 +71,9 @@ endif()
 
 # ─── Core library ────────────────────────────────────────────
 add_subdirectory(src)
+
+# ─── Python Bindings ─────────────────────────────────────────
+add_subdirectory(python)
 
 # ─── Tests ───────────────────────────────────────────────────
 if(MINITENSOR_BUILD_TESTS)

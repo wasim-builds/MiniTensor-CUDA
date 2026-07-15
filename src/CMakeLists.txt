@@ -22,9 +22,11 @@ target_include_directories(minitensor
 )
 
 # CUDA compile options
-target_compile_options(minitensor PRIVATE
-    $<$<COMPILE_LANGUAGE:CUDA>:${MINITENSOR_CUDA_FLAGS}>
-)
+if(NOT MINITENSOR_CPU_ONLY)
+    target_compile_options(minitensor PRIVATE
+        $<$<COMPILE_LANGUAGE:CUDA>:${MINITENSOR_CUDA_FLAGS}>
+    )
+endif()
 
 # NVTX definition
 if(MINITENSOR_ENABLE_NVTX AND NVTX_LIBRARY)
@@ -41,7 +43,9 @@ if(NOT MINITENSOR_CPU_ONLY)
 endif()
 
 # Enable separate compilation (needed for device lambdas)
-set_target_properties(minitensor PROPERTIES
-    CUDA_SEPARABLE_COMPILATION ON
-    POSITION_INDEPENDENT_CODE ON
-)
+if(NOT MINITENSOR_CPU_ONLY)
+    set_target_properties(minitensor PROPERTIES
+        CUDA_SEPARABLE_COMPILATION ON
+        POSITION_INDEPENDENT_CODE ON
+    )
+endif()
