@@ -1,3 +1,7 @@
+if(MINITENSOR_CPU_ONLY)
+    file(GLOB_RECURSE TEST_SOURCES "*.cu")
+    set_source_files_properties(${TEST_SOURCES} PROPERTIES LANGUAGE CXX)
+endif()
 # ──────────────────────────────────────────────────────
 # tests/CMakeLists.txt
 # ──────────────────────────────────────────────────────

@@ -1,3 +1,7 @@
+if(MINITENSOR_CPU_ONLY)
+    file(GLOB_RECURSE BENCH_SOURCES "*.cu")
+    set_source_files_properties(${BENCH_SOURCES} PROPERTIES LANGUAGE CXX)
+endif()
 # ──────────────────────────────────────────────────────
 # benchmarks/CMakeLists.txt
 # ──────────────────────────────────────────────────────

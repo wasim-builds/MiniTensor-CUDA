@@ -13,6 +13,9 @@ file(GLOB_RECURSE MT_SOURCES
 )
 
 # Build shared library
+if(MINITENSOR_CPU_ONLY)
+    set_source_files_properties(${MT_SOURCES} PROPERTIES LANGUAGE CXX)
+endif()
 add_library(minitensor SHARED ${MT_SOURCES})
 
 target_include_directories(minitensor

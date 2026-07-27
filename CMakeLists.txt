@@ -27,6 +27,7 @@ option(MINITENSOR_ENABLE_NVTX      "Enable NVTX profiling markers" ON)
 
 # ─── Find packages ───────────────────────────────────────────
 if(NOT MINITENSOR_CPU_ONLY)
+    enable_language(CUDA)
     find_package(CUDAToolkit REQUIRED)
     # Detect GPU architecture automatically (requires CUDA 11.6+)
     include(FindCUDA/select_compute_arch)
